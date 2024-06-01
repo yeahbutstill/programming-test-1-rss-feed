@@ -9,7 +9,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ItemControllerIntegrationTest {
+class HelloControllerIntegrationTest {
     @LocalServerPort
     private Integer port;
 
@@ -18,7 +18,7 @@ class ItemControllerIntegrationTest {
 
     @Test
     void helloGuest() throws Exception {
-        ResponseEntity<String> responseEntity = testRestTemplate.getForEntity("http://localhost:" + port + "/sonar/hello", String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.getForEntity("http://localhost:" + port + "/yeahbutstill/hello", String.class);
         String body = responseEntity.getBody();
         Assertions.assertNotNull(body);
         Assertions.assertEquals("Hello Sonar!", body.trim());
@@ -26,7 +26,7 @@ class ItemControllerIntegrationTest {
 
     @Test
     void helloName() throws Exception {
-        ResponseEntity<String> responseEntity = testRestTemplate.getForEntity("http://localhost:" + port + "/sonar/hello?name=DNL", String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.getForEntity("http://localhost:" + port + "/yeahbutstill/hello?name=DNL", String.class);
         String body = responseEntity.getBody();
         Assertions.assertNotNull(body);
         Assertions.assertEquals("Hello DNL!", body.trim());

@@ -1,6 +1,6 @@
 package com.sonarplatform.programmingtest1rssfeed.controller;
 
-import com.sonarplatform.programmingtest1rssfeed.service.ItemService;
+import com.sonarplatform.programmingtest1rssfeed.service.impl.HelloServiceImpl;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ItemControllerTest {
+class HelloControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -27,26 +27,26 @@ class ItemControllerTest {
     // lalu di registrasikan sebagai spring bean kedalam springnya.
     // jadi nanti di class manapun yang membutuhkan properti ini, dia akan menggunakan properti yang ini.
     // "Lantas gimana dengan properti yang sudah diimplementkan dan sudah diregistrasikan?" nah yang mock bean ini
-    // nanti dia akan dijadi sebagai primary (dia yang akan pertama kali digunakan)
+    // nanti dia akan dijadikan sebagai primary (dia yang akan pertama kali digunakan)
     // jadi nanti ketika kita jalankan unit testnya, yang di controller akan direplace dengan mock bean ini
     @MockBean
-    private ItemService itemService;
+    private HelloServiceImpl helloServiceImpl;
 
     // ini seolah-olah akan menjadi class implement dari service tersebut
     @BeforeEach
     void setup() {
         // ketika service ini di panggil hellonya dengan parameter apapun itu, maka dia balikannya harus "Hello DNL!"
-        Mockito.when(itemService.hello(Mockito.anyString()))
+        Mockito.when(helloServiceImpl.hello(Mockito.anyString()))
                 .thenReturn("Hello DNL!");
         // ketika service ini di panggil hellonya dengan parameter null, maka dia balikannya harus "Hello Sonar!"
-        Mockito.when(itemService.hello(null))
+        Mockito.when(helloServiceImpl.hello(null))
                 .thenReturn("Hello Sonar!");
     }
 
     @Test
     void helloGuest() throws Exception {
         mockMvc.perform(
-                get("/sonar/hello")
+                get("/yeahbutstill/hello")
         ).andExpectAll(
                 status().isOk(),
                 content().string(Matchers.containsString("Hello Sonar!"))
@@ -56,7 +56,7 @@ class ItemControllerTest {
     @Test
     void helloName() throws Exception {
         mockMvc.perform(
-                get("/sonar/hello").queryParam("name", "DNL")
+                get("/yeahbutstill/hello").queryParam("name", "DNL")
         ).andExpectAll(
                 status().isOk(),
                 content().string(Matchers.containsString("Hello DNL!"))
@@ -66,7 +66,7 @@ class ItemControllerTest {
     @Test
     void helloGuestHelloService() throws Exception {
         mockMvc.perform(
-                get("/sonar/hello_mock_bean")
+                get("/yeahbutstill/hello_mock_bean")
         ).andExpectAll(
                 status().isOk(),
                 content().string(Matchers.containsString("Hello Sonar!"))
@@ -76,7 +76,7 @@ class ItemControllerTest {
     @Test
     void helloNameHelloService() throws Exception {
         mockMvc.perform(
-                get("/sonar/hello_mock_bean").queryParam("name", "DNL")
+                get("/yeahbutstill/hello_mock_bean").queryParam("name", "DNL")
         ).andExpectAll(
                 status().isOk(),
                 content().string(Matchers.containsString("Hello DNL!"))
@@ -86,7 +86,7 @@ class ItemControllerTest {
     @Test
     void paksaMethodPostDiMethodGet() throws Exception {
         mockMvc.perform(
-                post("/sonar/hello_mock_bean").queryParam("name", "DNL")
+                post("/yeahbutstill/hello_mock_bean").queryParam("name", "DNL")
         ).andExpectAll(
                 status().isMethodNotAllowed()
         );

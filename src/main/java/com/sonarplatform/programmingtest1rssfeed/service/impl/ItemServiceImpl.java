@@ -6,7 +6,6 @@ import com.sonarplatform.programmingtest1rssfeed.service.ItemService;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
@@ -31,14 +30,25 @@ implementasi, tanpa berdampak pada class lain yang menggunakan interfacenya
 @Service // secara otomatis class ini akan di registrasikan sebagai spring bean
 @Transactional
 public class ItemServiceImpl implements ItemService {
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
+    public ItemServiceImpl(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    /**
+     * @return
+     */
+    @Override
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
 
+    /**
+     * @return
+     */
     @SneakyThrows
+    @Override
     public List<String> getStrings() {
         List<String> detailArticles = new ArrayList<>();
         for (Item item : itemRepository.findAll()) {
@@ -51,18 +61,36 @@ public class ItemServiceImpl implements ItemService {
         return detailArticles;
     }
 
+    /**
+     * @param id
+     * @return
+     */
+    @Override
     public Item getItemById(Integer id) {
         return itemRepository.findById(id).orElse(null);
     }
 
+    /**
+     * @param item
+     * @return
+     */
+    @Override
     public Item saveItem(Item item) {
         return itemRepository.save(item);
     }
 
+    /**
+     * @param id
+     */
+    @Override
     public void deleteItem(Integer id) {
         itemRepository.deleteById(id);
     }
 
+    /**
+     * @param rssUrl
+     */
+    @Override
     public void fetchRssFeed(String rssUrl) {
         try {
             URL url = new URL(rssUrl);
@@ -100,15 +128,4 @@ public class ItemServiceImpl implements ItemService {
             e.printStackTrace();
         }
     }
-
-    /**
-     * @param name
-     * @return
-     */
-    @Override
-    public String hello(String name) {
-        if (name == null) return "Hello Sonar!";
-        return "Hello " + name + "!";
-    }
-
 }

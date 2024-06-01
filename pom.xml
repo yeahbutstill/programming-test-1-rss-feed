@@ -147,7 +147,7 @@
 							<schemaPaths>
 								<param>src/main/resources/graphql-client</param>
 							</schemaPaths>
-							<packageName>com.yeahbutstill.belajar_setup_development_environment_docker.codegen</packageName>
+							<packageName>com.sonarplatform.programmingtest1rssfeed.codegen</packageName>
 							<addGeneratedAnnotation>true</addGeneratedAnnotation>
 						</configuration>
 					</execution>
