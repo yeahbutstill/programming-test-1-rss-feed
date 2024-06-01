@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Item</title>
+</head>
+<body>
+<h1>New Item</h1>
+<form method="post" th:action="@{/items}" th:object="${item}">
+    <div>
+        <label>Title:</label>
+        <input th:field="*{title}" type="text"/>
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label>Link:</label>
+        <input th:field="*{link}" type="text"/>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+<a th:href="@{/items}">Back to list</a>
+</body>
+</html>

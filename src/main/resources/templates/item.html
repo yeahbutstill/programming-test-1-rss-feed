@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Item Details</title>
+</head>
+<body>
+<h1>Item Details</h1>
+<div>
+    <label>Title:</label>
+    <span th:text="${item.title}"></span>
+</div>
+<div>
+    <label>Description:</label>
+    <span th:text="${item.description}"></span>
+</div>
+<div>
+    <label>Link:</label>
+    <a th:href="${item.link}" th:text="${item.link}"></a>
+</div>
+<a th:href="@{/items}">Back to list</a>
+</body>
+</html>

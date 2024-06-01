@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Items</title>
+</head>
+<body>
+<h1>Items</h1>
+<form action="#" method="post" th:action="@{/items/fetch}">
+    <input name="url" placeholder="RSS Feed URL" type="text"/>
+    <button type="submit">Fetch RSS</button>
+</form>
+<ul th:each="item : ${items}">
+    <ul>
+        <li th:each="article : ${detailArticles}" th:text="${article}"></li>
+    </ul>
+    <li>Url: <a th:href="${item.url}" th:text="${item.url}"></a></li>
+    <li th:text="|Judul: ${item.title}|"></li>
+    <li th:text="|Waktu Tayang: ${item.publishedDate}|"></li>
+    <li th:text="|Kontent Lengkap: ${item.content}|"></li>
+</ul>
+
+</body>
+</html>
