@@ -50,6 +50,10 @@ public class HelloController {
      *              akan dimasukan kedalam String name.
      * @param httpServletResponse
      * @throws IOException
+     *
+     * kita tahu bahwa query parameter itu datanya adalah String
+     * Tapi jika kita membutuhkan datanya dalam bentuk tipe data lain, Spring bisa secara otomatis
+     * melakukan konversi tipe datanya menggunakan fitur Converter Spring Config Properties
      */
     @GetMapping("/hello_request_param")
     public void helloRequestParam(@RequestParam(name = "name", required = false) String name,
